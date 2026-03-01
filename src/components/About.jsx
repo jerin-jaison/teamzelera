@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import CountUp from 'react-countup'
@@ -10,11 +11,20 @@ const stats = [
 
 export default function About() {
     const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.25 })
+    const [isMobile, setIsMobile] = useState(false)
+
+    useEffect(() => {
+        const mq = window.matchMedia('(max-width: 768px)')
+        setIsMobile(mq.matches)
+        const handler = (e) => setIsMobile(e.matches)
+        mq.addEventListener('change', handler)
+        return () => mq.removeEventListener('change', handler)
+    }, [])
 
     return (
         <section
             id="about"
-            style={{ padding: '120px 32px', position: 'relative', overflow: 'hidden' }}
+            style={{ padding: isMobile ? '80px 20px' : '120px 32px', position: 'relative', overflow: 'hidden' }}
         >
             <div
                 style={{
@@ -74,8 +84,8 @@ export default function About() {
                     ref={ref}
                     style={{
                         display: 'grid',
-                        gridTemplateColumns: 'repeat(3, 1fr)',
-                        gap: '20px',
+                        gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
+                        gap: isMobile ? '12px' : '20px',
                         marginBottom: '48px',
                     }}
                 >

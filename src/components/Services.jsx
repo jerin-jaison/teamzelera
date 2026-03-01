@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
@@ -42,12 +43,21 @@ const services = [
 
 export default function Services() {
     const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.08 })
+    const [isMobile, setIsMobile] = useState(false)
+
+    useEffect(() => {
+        const mq = window.matchMedia('(max-width: 768px)')
+        setIsMobile(mq.matches)
+        const handler = (e) => setIsMobile(e.matches)
+        mq.addEventListener('change', handler)
+        return () => mq.removeEventListener('change', handler)
+    }, [])
 
     return (
         <section
             id="services"
             className="section-bg"
-            style={{ padding: '120px 32px', position: 'relative', overflow: 'hidden' }}
+            style={{ padding: isMobile ? '80px 20px' : '120px 32px', position: 'relative', overflow: 'hidden' }}
         >
             {/* Background blobs */}
             <div
@@ -91,7 +101,7 @@ export default function Services() {
                     ref={ref}
                     style={{
                         display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+                        gridTemplateColumns: `repeat(auto-fit, minmax(min(340px, 100%), 1fr))`,
                         gap: '20px',
                     }}
                 >
