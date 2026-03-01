@@ -1,10 +1,19 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { FaInstagram, FaWhatsapp, FaHeart } from 'react-icons/fa'
 
 export default function Contact() {
     const [form, setForm] = useState({ name: '', email: '', message: '' })
     const [focused, setFocused] = useState(null)
+    const [isMobile, setIsMobile] = useState(false)
+
+    useEffect(() => {
+        const mq = window.matchMedia('(max-width: 768px)')
+        setIsMobile(mq.matches)
+        const handler = (e) => setIsMobile(e.matches)
+        mq.addEventListener('change', handler)
+        return () => mq.removeEventListener('change', handler)
+    }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -42,7 +51,7 @@ export default function Contact() {
     return (
         <section
             id="contact"
-            style={{ padding: '120px 32px 0', position: 'relative', overflow: 'hidden' }}
+            style={{ padding: isMobile ? '80px 20px 0' : '120px 32px 0', position: 'relative', overflow: 'hidden' }}
         >
             <div
                 style={{
@@ -83,8 +92,8 @@ export default function Contact() {
                 <div
                     style={{
                         display: 'grid',
-                        gridTemplateColumns: 'minmax(280px, 420px) 1fr',
-                        gap: '40px',
+                        gridTemplateColumns: isMobile ? '1fr' : 'minmax(280px, 420px) 1fr',
+                        gap: isMobile ? '32px' : '40px',
                         alignItems: 'start',
                     }}
                 >
@@ -310,7 +319,7 @@ export default function Contact() {
                                 </span>
                             </div>
                             <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.875rem', color: 'var(--color-gray-text)', lineHeight: 1.75, maxWidth: '220px' }}>
-                                Premium websites built for ambitious businesses 
+                                Premium websites built for ambitious businesses
                             </p>
                         </div>
 

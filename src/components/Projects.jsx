@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import sahasraraImg from '../static/image.png'
@@ -189,10 +190,20 @@ function PlaceholderCard({ index }) {
 }
 
 export default function Projects() {
+    const [isMobile, setIsMobile] = useState(false)
+
+    useEffect(() => {
+        const mq = window.matchMedia('(max-width: 768px)')
+        setIsMobile(mq.matches)
+        const handler = (e) => setIsMobile(e.matches)
+        mq.addEventListener('change', handler)
+        return () => mq.removeEventListener('change', handler)
+    }, [])
+
     return (
         <section
             id="projects"
-            style={{ padding: '120px 32px', position: 'relative', overflow: 'hidden' }}
+            style={{ padding: isMobile ? '80px 20px' : '120px 32px', position: 'relative', overflow: 'hidden' }}
         >
             <div
                 style={{
@@ -232,8 +243,8 @@ export default function Projects() {
                 <div
                     style={{
                         display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(480px, 1fr))',
-                        gap: '20px',
+                        gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(480px, 1fr))',
+                        gap: isMobile ? '16px' : '20px',
                     }}
                 >
                     {projects.map((p, i) => <ProjectCard key={p.name} project={p} index={i} />)}
