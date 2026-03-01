@@ -1,11 +1,13 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import sahasraraImg from '../static/image.png'
 
 const projects = [
     {
         name: 'Sahasrara Wellness',
         tag: 'Wellness Platform',
         url: 'https://sahasrara-wellness.onrender.com/',
+        image: sahasraraImg,
         tagColor: 'rgba(139, 92, 246, 0.15)',
         tagTextColor: '#a78bfa',
         topGlow: 'rgba(139, 92, 246, 0.1)',
@@ -32,7 +34,7 @@ function ProjectCard({ project, index }) {
             className="premium-card"
             style={{ overflow: 'hidden' }}
         >
-            {/* iframe thumbnail */}
+            {/* Preview thumbnail */}
             <div
                 style={{
                     position: 'relative',
@@ -41,24 +43,37 @@ function ProjectCard({ project, index }) {
                     background: `linear-gradient(135deg, #0f0f0f, #161616)`,
                 }}
             >
-                <iframe
-                    src={project.url}
-                    title={project.name}
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '200%',
-                        height: '200%',
-                        transformOrigin: 'top left',
-                        transform: 'scale(0.5)',
-                        border: 'none',
-                        pointerEvents: 'none',
-                        opacity: 0.85,
-                    }}
-                    loading="lazy"
-                    sandbox="allow-scripts allow-same-origin"
-                />
+                {project.image ? (
+                    <img
+                        src={project.image}
+                        alt={project.name}
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            opacity: 0.9,
+                        }}
+                    />
+                ) : (
+                    <iframe
+                        src={project.url}
+                        title={project.name}
+                        style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            width: '200%',
+                            height: '200%',
+                            transformOrigin: 'top left',
+                            transform: 'scale(0.5)',
+                            border: 'none',
+                            pointerEvents: 'none',
+                            opacity: 0.85,
+                        }}
+                        loading="lazy"
+                        sandbox="allow-scripts allow-same-origin"
+                    />
+                )}
                 {/* Gradient overlay */}
                 <div
                     style={{
