@@ -207,6 +207,7 @@ export default function Navbar() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="btn-gold mt-4 w-full"
+                                style={{ fontSize: '0.82rem', padding: '10px 18px', textAlign: 'center' }}
                             >
                                 Get a Quote →
                             </a>

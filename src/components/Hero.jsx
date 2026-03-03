@@ -125,8 +125,8 @@ export default function Hero() {
                     className="text-lg md:text-xl mb-3 font-medium"
                     css={{ color: 'var(--color-white-dim)' }}
                 >
-                    {/* <span style={{ color: 'var(--color-white-dim)' }}>Premium Websites. Affordable Prices.</span>{' '}
-                    <span style={{ color: 'var(--color-gold)', fontWeight: 600 }}>Zero Compromise.</span> */}
+                    <span style={{ color: 'var(--color-white-dim)' }}>Premium Websites. Affordable Prices.</span>{' '}
+                    <span style={{ color: 'var(--color-gold)', fontWeight: 600 }}>Zero Compromise.</span>
                 </motion.p>
 
                 <motion.div
