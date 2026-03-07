@@ -21,6 +21,14 @@ const projects = [
         tagTextColor: 'var(--color-gold)',
         topGlow: 'rgba(212, 168, 67, 0.08)',
     },
+    {
+        name: 'Yannte Pattupetti',
+        tag: 'Personal Website',
+        url: 'https://yantepattupetti.vercel.app/',
+        tagColor: 'rgba(212, 168, 67, 0.12)',
+        tagTextColor: 'var(--color-gold)',
+        topGlow: 'rgba(212, 168, 67, 0.08)',
+    },
 ]
 
 function ProjectCard({ project, index }) {
